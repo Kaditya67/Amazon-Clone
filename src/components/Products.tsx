@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { HiShoppingCart } from 'react-icons/hi';
 import { FaHeart } from 'react-icons/fa';
 import FormattedPrice from './FormatedPrice';
-import { addToCart } from '@/store/nextslice';
+import { addToCart, addToFavourite } from '@/store/nextslice';
 import { useDispatch } from 'react-redux';
 
 
@@ -27,10 +27,18 @@ const Products: React.FC<ProductsProps> = ({ prodData }) => {
               height={300} 
             />
             <div className="w-12 h-12 absolute bottom-20 right-0 border-[1px] border-gray-400 bg-white rounded-md flex flex-col translate-x-20 group-hover:translate-x-0 transition-transform duration-300">
-              <span className="w-full h-full border-b-[1px] border-b-gray-400 flex items-center justify-center text-xl bg-transparent hover:bg-amazon_yellow cursor-pointer duration-300">
+              <span
+              onClick={() => dispatch(
+                addToCart({ id, title, price, description, category, image , quantity: 1 })
+              )}
+              className="w-full h-full border-b-[1px] border-b-gray-400 flex items-center justify-center text-xl bg-transparent hover:bg-amazon_yellow cursor-pointer duration-300">
                 <HiShoppingCart />
               </span>
-              <span className="w-full h-full border-b-[1px] border-b-gray-400 flex items-center justify-center text-xl bg-transparent hover:bg-amazon_yellow cursor-pointer duration-300">
+              <span
+              onClick={() => dispatch(
+                addToFavourite({ id, title, price, description, category, image })
+              )} 
+              className="w-full h-full border-b-[1px] border-b-gray-400 flex items-center justify-center text-xl bg-transparent hover:bg-amazon_yellow cursor-pointer duration-300">
                 <FaHeart />
               </span>
             </div>

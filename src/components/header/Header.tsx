@@ -7,9 +7,15 @@ import {CiLocationOn} from 'react-icons/ci';
 import {BiCaretDown} from 'react-icons/bi';
 import {HiOutlineSearch} from 'react-icons/hi'
 import Link from 'next/link'
-
+import { useDispatch, useSelector } from 'react-redux';
+import { stateProps } from '../../../type';
 
 export default function Header() {
+    const dispatch=useDispatch()
+    const {productData, favouriteData, userInfo }=useSelector(
+        (state:stateProps)=>state.next || {}
+    )
+
   return (
     <div className='w-full h-16 bg-amazon_blue text-lightText sticky top-0 z-50'>
       <div className='justify-between items-center h-full w-full mx-auto inline-flex gap-1 mdl:gap-3 px-4'>
@@ -50,13 +56,16 @@ export default function Header() {
             border-transparent hover:border-white cursor-pointer duration-300 h-[70%] relative">
         <p>Marked</p>
         <p className="=text-white font-bold">& Favorite</p>
+        {
+            favouriteData ? <span className="absolute text-amazon_yellow text-sm top-0 left-[55px] font-bold">{favouriteData.length}</span> : ''
+        }
     </div>
 
     {/* cart  */}
     <Link href={"/cart"} className=" flex border border-transparent px-2 hover:border-white cursor:pointer duration-300 items-center justify-center h-[70%] relative">
         <Image src={cart} alt="cart" className='w-auto h-8 object-cover cursor-pointer' />
         <p className='text-white font-bold text-ml mt-3'>Cart</p>
-        <span className='absolute text-amazon_yellow text-sm top-2 left-[30px] font-bold'>0</span>
+        <span className='absolute text-amazon_yellow text-sm top-2 left-[30px] font-bold'>{productData ? productData.length : 0}</span>
     </Link>
 
 

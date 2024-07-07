@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { userInfo } from "os";
 import { StoreProduct } from "../../type";
 
 interface NextState{
@@ -33,7 +32,7 @@ export const nextSlice = createSlice({
             }
         },
         addToFavourite: (state, action) => {
-            const existingProduct = state.productData.find(
+            const existingProduct = state.favouriteData.find(
                 (item: StoreProduct) => item.id === action.payload.id
             )
             if(existingProduct){
@@ -58,10 +57,26 @@ export const nextSlice = createSlice({
                 existingProduct!.quantity--;
             }
         },
-        
+        deleteProduct:(state,action) => {
+            state.productData = state.productData.filter(
+                (item)=>item.id !== action.payload.id
+            );
+        },
+        resetCart:(state) => {
+            state.productData = [];
+        },
+        addUser:(state,action) => {
+            state.userInfo = action.payload
+        },
+        removeUser:(state) =>{
+            state.userInfo = null;
+        },
+        setAllProducts: (state,action) => {
+            state.allProducts = action.payload;
+        },
     },
 });
 
-export const { addToCart } = nextSlice.actions;
+export const { addToCart, addToFavourite, increaseQuantity, decreaseQuantity, deleteProduct, resetCart, addUser, removeUser, setAllProducts } = nextSlice.actions;
 
 export default nextSlice.reducer;

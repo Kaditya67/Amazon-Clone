@@ -1,10 +1,10 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import Header from "@/components/header/Header";
-import HeaderBottom from "@/components/header/HeaderBottom";
-import Footer from "@/components/Footer";
-import Banner from "@/components/Banner";
+// import Image from "next/image";
+// import { Inter } from "next/font/google";
+// import Header from "@/components/header/Header";
+// import HeaderBottom from "@/components/header/HeaderBottom";
+// import Footer from "@/components/Footer";
 import Products from "@/components/Products";
+import Banner from "@/components/Banner";
 import { ProductProps } from "../../type";
 
 interface Props {
@@ -16,7 +16,7 @@ export default function Home({ prodData }: Props) {
   return (
     <main>
       <Banner />
-      {/* <Products prodData={prodData} /> */}
+      <Products prodData={prodData} />
     </main>
   );
 }
