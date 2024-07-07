@@ -1,5 +1,5 @@
-import { configureStore } from "@reduxjs/toolkit";
-import nextReducer from "./nextslice";
+import { configureStore } from '@reduxjs/toolkit'
+import nextReducer from "./nextSlice";
 import {
     persistStore,
     persistReducer,
@@ -12,24 +12,23 @@ import {
   } from 'redux-persist'
   import storage from 'redux-persist/lib/storage'
 
+
   const persistConfig = {
     key: 'root',
     version: 1,
     storage,
   }
-
-const persistedReducer = persistReducer(persistConfig, nextReducer)
+  
+  const persistedReducer = persistReducer(persistConfig, nextReducer)
 
 export const store = configureStore({
     reducer: {next:persistedReducer},
-
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            serializableCheck: {
-                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-            },
-        }
-    ),
+      getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+      }),
 });
 
 export let persistor = persistStore(store)

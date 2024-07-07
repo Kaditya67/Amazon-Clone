@@ -9,7 +9,7 @@ import sliderImg_6 from "../images/slider/slide6.jpg"
 import sliderImg_7 from "../images/slider/slide7.jpg"
 import sliderImg_8 from "../images/slider/slide8.jpg"
 import Image from "next/image";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+
 
 
 const Banner = () =>{
