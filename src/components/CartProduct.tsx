@@ -8,7 +8,8 @@ import {
   decreaseQuantity,
   deleteProduct,
   increaseQuantity,
-} from "../store/nextSlice";
+} from "../store/nextSlice"; // Ensure this path is correct
+
 interface Item {
   id: number;
   title: string;
@@ -17,15 +18,27 @@ interface Item {
   category: string;
   image: string;
   quantity: number;
-
 }
 
-interface cartProductProps {
+interface CartProductProps {
   item: Item;
 }
 
-const CartProduct = ({ item }: cartProductProps) => {
+const CartProduct: React.FC<CartProductProps> = ({ item }) => {
   const dispatch = useDispatch();
+
+  const handleIncreaseQuantity = () => {
+    dispatch(increaseQuantity(item));
+  };
+
+  const handleDecreaseQuantity = () => {
+    dispatch(decreaseQuantity(item));
+  };
+
+  const handleDeleteProduct = () => {
+    dispatch(deleteProduct(item.id));
+  };
+
   return (
     <div className="bg-gray-100 rounded-lg flex items-center gap-4">
       <Image
@@ -48,45 +61,21 @@ const CartProduct = ({ item }: cartProductProps) => {
           <div className="flex items-center gap-6">
             <div className="flex items-center mt-1 justify-between border border-gray-300 px-4 py-1 rounded-full w-28 shadow-lg shadow-gray-300">
               <span
-                onClick={() =>
-                  dispatch(
-                    increaseQuantity({
-                      id: item.id,
-                      title: item.title,
-                      price: item.price,
-                      description: item.description,
-                      category: item.category,
-                      image: item.image,
-                      quantity: 1,
-                    })
-                  )
-                }
+                onClick={handleIncreaseQuantity}
                 className="w-6 h-6 flex items-center justify-center rounded-full text-base bg-transparent hover:bg-gray-300 cursor-pointer decoration-purple-300"
               >
                 <LuPlus />
               </span>
               <span>{item.quantity}</span>
               <span
-                onClick={() =>
-                  dispatch(
-                    decreaseQuantity({
-                      id: item.id,
-                      title: item.title,
-                      price: item.price,
-                      description: item.description,
-                      category: item.category,
-                      image: item.image,
-                      quantity: 1,
-                    })
-                  )
-                }
+                onClick={handleDecreaseQuantity}
                 className="w-6 h-6 flex items-center justify-center rounded-full text-base bg-transparent hover:bg-gray-300 cursor-pointer decoration-purple-300"
               >
                 <LuMinus />
               </span>
             </div>
             <div
-              onClick={() => dispatch(deleteProduct(item.id))}
+              onClick={handleDeleteProduct}
               className="flex items-center text-sm font-medium text-gray-400 hover:text-red-600 cursor-pointer duration-300"
             >
               <IoMdClose className="mt-[2px]" /> <p>remove</p>
