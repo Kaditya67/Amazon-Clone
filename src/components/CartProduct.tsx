@@ -4,11 +4,7 @@ import FormattedPrice from "./FormattedPrice";
 import { LuMinus, LuPlus } from "react-icons/lu";
 import { IoMdClose } from "react-icons/io";
 import { useDispatch } from "react-redux";
-import {
-  decreaseQuantity,
-  deleteProduct,
-  increaseQuantity,
-} from "../store/nextSlice"; // Ensure this path is correct
+import { decreaseQuantity, deleteProduct, increaseQuantity } from "../store/nextSlice";
 
 interface Item {
   id: number;
